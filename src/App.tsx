@@ -1,35 +1,70 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./App.css";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
 
-function App() {
-  const [count, setCount] = useState(0)
+const data = [
+  {
+    name: "Page A",
+    uv: 4000,
+    pv: 2400,
+  },
+  {
+    name: "Page B",
+    uv: 3000,
+    pv: 1398,
+  },
+  {
+    name: "Page C",
+    uv: 2000,
+    pv: 9800,
+  },
+  {
+    name: "Page D",
+    uv: 2780,
+    pv: 3908,
+  },
+  {
+    name: "Page E",
+    uv: 1890,
+    pv: 4800,
+  },
+  {
+    name: "Page F",
+    uv: 2390,
+    pv: 3800,
+  },
+  {
+    name: "Page G",
+    uv: 3490,
+    pv: 4300,
+  },
+];
 
+export default function App() {
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <ResponsiveContainer width={"100%"} height={300}>
+      <LineChart data={data} margin={{ top: 20 }} accessibilityLayer>
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="name" padding={{ left: 30, right: 30 }} />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+        <Line
+          type="monotone"
+          dataKey="pv"
+          stroke="#8884d8"
+          activeDot={{ r: 8 }}
+        ></Line>
+        <Line type="monotone" dataKey="uv" stroke="#82ca9d"></Line>
+      </LineChart>
+    </ResponsiveContainer>
+  );
 }
-
-export default App
